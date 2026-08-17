@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brutal Bomber | Elite Panel</title>
+    <title>Elite Panel | Pro UI</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -36,12 +36,12 @@
 
         .input-group { margin-bottom: 18px; text-align: left; }
         .input-group label { display: block; font-size: 0.75rem; color: var(--neon-cyan); margin-bottom: 6px; text-transform: uppercase; font-weight: 600; letter-spacing: 1.5px; text-shadow: 0 0 8px rgba(0,243,255,0.3);}
-        .input-group input, .input-group select { 
+        .input-group input { 
             width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); 
             color: white; padding: 10px 14px; border-radius: 6px; font-size: 0.9rem; 
             outline: none; transition: 0.3s; backdrop-filter: blur(5px);
         }
-        .input-group input:focus, .input-group select:focus { border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(0, 243, 255, 0.2); }
+        .input-group input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(0, 243, 255, 0.2); }
         
         .btn { 
             padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; 
@@ -51,12 +51,8 @@
         }
         .btn-cyan { background: linear-gradient(90deg, #005e7a, #00b4d8); border: 1px solid var(--neon-cyan); box-shadow: 0 0 10px rgba(0,243,255,0.3); }
         .btn-cyan:hover { box-shadow: 0 0 20px rgba(0,243,255,0.6); transform: translateY(-2px);}
-        .btn-purple { background: linear-gradient(90deg, #590a7a, #bc13fe); border: 1px solid var(--neon-purple); box-shadow: 0 0 10px rgba(188,19,254,0.3);}
-        .btn-purple:hover { box-shadow: 0 0 20px rgba(188,19,254,0.6); transform: translateY(-2px);}
         .btn-red { background: linear-gradient(90deg, #7a0a20, #ff003c); border: 1px solid var(--neon-red); box-shadow: 0 0 10px rgba(255,0,60,0.3);}
-        .btn-red:hover { box-shadow: 0 0 20px rgba(255,0,60,0.6); transform: translateY(-2px);}
         
-        /* Tabs Styling for Call & SMS */
         .tabs-container { display: flex; gap: 10px; margin-bottom: 20px; }
         .tab-btn { flex: 1; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: var(--text-muted); font-weight: bold; border-radius: 6px; cursor: pointer; text-align: center; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; transition: 0.3s; }
         .tab-btn.active { background: rgba(0, 243, 255, 0.15); color: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0,243,255,0.3); }
@@ -74,7 +70,7 @@
             padding: 12px 20px; background: rgba(5, 5, 10, 0.7); backdrop-filter: blur(12px); 
             border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 50; 
         }
-        .menu-btn { background: none; border: none; color: var(--neon-cyan); font-size: 1.5rem; cursor: pointer; text-shadow: 0 0 10px var(--neon-cyan); transition: 0.3s;}
+        .menu-btn { background: none; border: none; color: var(--neon-cyan); font-size: 1.5rem; cursor: pointer; text-shadow: 0 0 10px var(--neon-cyan); }
         .credit-badge { 
             background: rgba(0, 255, 102, 0.1); color: var(--neon-green); padding: 6px 12px; 
             border-radius: 4px; font-weight: 600; font-size: 0.80rem; border: 1px solid rgba(0, 255, 102, 0.3);
@@ -104,7 +100,7 @@
             <h2>ACCESS<span style="color: var(--neon-cyan);">_TERMINAL</span></h2>
             <div class="input-group">
                 <label>Security Key / Password</label>
-                <input type="password" id="login-pass" autocomplete="off" placeholder="Enter Key or Master Password">
+                <input type="password" id="login-pass" autocomplete="off" placeholder="Enter Key">
             </div>
             <button class="btn btn-cyan" onclick="login()">Authenticate</button>
         </div>
@@ -118,7 +114,6 @@
         </header>
 
         <div class="dashboard-container">
-            <!-- Welcome Header -->
             <h2 style="font-size: 2rem; color: #fff; text-align: center; margin-bottom: 10px; text-shadow: 0 0 10px var(--neon-cyan);">welcome smart user's</h2>
 
             <div class="panel-box">
@@ -128,13 +123,11 @@
                     <button class="tab-btn" id="btn-sms" onclick="switchTab('sms')">SMS</button>
                 </div>
 
-                <!-- ENTER NUMBER -->
                 <div class="input-group">
                     <label>ENTER NUMBER</label>
                     <input type="text" id="target-number" placeholder="Enter 10 digit number" maxlength="10">
                 </div>
 
-                <!-- ENTER COUNT -->
                 <div class="input-group">
                     <label>ENTER COUNT</label>
                     <input type="number" id="target-count" value="10" min="1" max="100">
@@ -145,13 +138,6 @@
                 <div id="execution-status" style="margin-top: 15px; text-align: center; font-size: 0.9rem; color: var(--neon-green);"></div>
             </div>
         </div>
-    </div>
-
-    <!-- Sidebar Menu -->
-    <div id="sidebar" style="position: fixed; top: 0; left: -300px; width: 280px; height: 100vh; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border-right: 1px solid var(--glass-border); transition: 0.4s; z-index: 1000; padding: 20px;">
-        <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size:1.8rem; float:right; cursor:pointer;">×</button>
-        <h2 style="color:var(--neon-cyan); margin-bottom:30px; font-family:'Rajdhani',sans-serif;">CONTROL_PANEL</h2>
-        <button class="btn btn-red" onclick="logout()">Logout System</button>
     </div>
 
     <div id="toast" class="toast"><span id="toast-msg">Success!</span></div>
@@ -169,7 +155,7 @@
         };
 
         firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();[span_4](start_span)[span_4](end_span)
+        const db = firebase.database();[span_10](start_span)[span_10](end_span)
 
         let currentMode = 'call';
 
@@ -191,7 +177,6 @@
                 return;
             }
 
-            // Real-time Firebase Database Key & Owner Verification
             db.ref('settings/owner_pass').once('value', (snap) => {
                 let dbOwnerPass = snap.val() || 'felix';
                 if(pass === dbOwnerPass || ['felix', 'bombom763', 'demo', 'roots'].includes(pass)) {
@@ -199,7 +184,6 @@
                     document.getElementById('login-screen').classList.add('hidden');
                     document.getElementById('dashboard-screen').classList.remove('hidden');
                 } else {
-                    // Check Reseller database keys
                     db.ref('resellers/' + pass).once('value', (resSnap) => {
                         const rData = resSnap.val();
                         if(rData) {
@@ -228,27 +212,20 @@
             statusDiv.innerText = `⚡ Executing ${currentMode.toUpperCase()} requests for +91${num} (${count} times)...`;
             
             try {
-                const response = await fetch('/bom', {
-                    method: 'GET',
+                const response = await fetch('/api/bomb', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ key: 'felix', num: num, type: currentMode, count: count })
                 });
-                showToast(`Attack successfully dispatched via live backend!`);
+                const data = await response.json();
+                statusDiv.innerText = `✅ Success: ${data.successful}/${data.total_apis} APIs triggered!`;
+                showToast(`Attack successfully dispatched!`);
             } catch (err) {
                 showToast(`Real-time trigger activated for +91${num}`);
             }
         }
 
-        function toggleSidebar() {
-            const sb = document.getElementById('sidebar');
-            if(sb.style.left === '0px') sb.style.left = '-300px';
-            else sb.style.left = '0px';
-        }
-
-        function logout() {
-            document.getElementById('dashboard-screen').classList.add('hidden');
-            document.getElementById('login-screen').classList.remove('hidden');
-            document.getElementById('login-pass').value = '';
-            toggleSidebar();
-        }
+        function toggleSidebar() {}
 
         function showToast(msg, isError = false) {
             const toast = document.getElementById('toast');
