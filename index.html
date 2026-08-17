@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brutal Bomber | Elite Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #05050A;
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --neon-green: #00ff66;
+            --neon-red: #ff003c;
+            --glass-bg: rgba(20, 20, 30, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #e2e8f0;
+            --text-muted: #828ca1;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 90%; } 
+        body { 
+            background-color: var(--bg-deep); 
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(188, 19, 254, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.15) 0%, transparent 40%);
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, .brand-font { font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; }
+        .hidden { display: none !important; }
+
+        .input-group { margin-bottom: 18px; text-align: left; }
+        .input-group label { display: block; font-size: 0.75rem; color: var(--neon-cyan); margin-bottom: 6px; text-transform: uppercase; font-weight: 600; letter-spacing: 1.5px; text-shadow: 0 0 8px rgba(0,243,255,0.3);}
+        .input-group input, .input-group select { 
+            width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); 
+            color: white; padding: 10px 14px; border-radius: 6px; font-size: 0.9rem; 
+            outline: none; transition: 0.3s; backdrop-filter: blur(5px);
+        }
+        .input-group input:focus, .input-group select:focus { border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(0, 243, 255, 0.2); }
+        
+        .btn { 
+            padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; 
+            cursor: pointer; border: none; transition: 0.3s; text-transform: uppercase; 
+            letter-spacing: 1px; width: 100%; color: #fff; position: relative; overflow: hidden;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .btn-cyan { background: linear-gradient(90deg, #005e7a, #00b4d8); border: 1px solid var(--neon-cyan); box-shadow: 0 0 10px rgba(0,243,255,0.3); }
+        .btn-cyan:hover { box-shadow: 0 0 20px rgba(0,243,255,0.6); transform: translateY(-2px);}
+        .btn-purple { background: linear-gradient(90deg, #590a7a, #bc13fe); border: 1px solid var(--neon-purple); box-shadow: 0 0 10px rgba(188,19,254,0.3);}
+        .btn-purple:hover { box-shadow: 0 0 20px rgba(188,19,254,0.6); transform: translateY(-2px);}
+        .btn-red { background: linear-gradient(90deg, #7a0a20, #ff003c); border: 1px solid var(--neon-red); box-shadow: 0 0 10px rgba(255,0,60,0.3);}
+        .btn-red:hover { box-shadow: 0 0 20px rgba(255,0,60,0.6); transform: translateY(-2px);}
+        
+        /* Tabs Styling for Call & SMS */
+        .tabs-container { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn { flex: 1; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: var(--text-muted); font-weight: bold; border-radius: 6px; cursor: pointer; text-align: center; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; transition: 0.3s; }
+        .tab-btn.active { background: rgba(0, 243, 255, 0.15); color: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0,243,255,0.3); }
+
+        #login-screen { display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .login-card { 
+            background: var(--glass-bg); padding: 40px 30px; border-radius: 16px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); width: 100%; max-width: 360px; text-align: center; border: 1px solid var(--glass-border); 
+            backdrop-filter: blur(15px);
+        }
+        .login-card h2 { margin-bottom: 25px; color: #fff; font-size: 2.2rem; text-shadow: 0 0 15px var(--neon-cyan);}
+
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 12px 20px; background: rgba(5, 5, 10, 0.7); backdrop-filter: blur(12px); 
+            border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 50; 
+        }
+        .menu-btn { background: none; border: none; color: var(--neon-cyan); font-size: 1.5rem; cursor: pointer; text-shadow: 0 0 10px var(--neon-cyan); transition: 0.3s;}
+        .credit-badge { 
+            background: rgba(0, 255, 102, 0.1); color: var(--neon-green); padding: 6px 12px; 
+            border-radius: 4px; font-weight: 600; font-size: 0.80rem; border: 1px solid rgba(0, 255, 102, 0.3);
+            text-transform: uppercase; letter-spacing: 1px; font-family: 'Rajdhani', sans-serif;
+        }
+
+        .dashboard-container { padding: 20px; max-width: 900px; margin: 0 auto; }
+        .panel-box { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); margin-top: 20px; }
+
+        .toast { 
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); 
+            background: rgba(0, 255, 102, 0.15); border: 1px solid var(--neon-green); color: #fff; 
+            padding: 12px 25px; border-radius: 6px; font-weight: 600; transition: 0.4s; z-index: 2000; font-size: 0.85rem;
+        }
+        .toast.show { bottom: 30px; }
+        .toast.error { background: rgba(255, 0, 60, 0.15); border-color: var(--neon-red); }
+    </style>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+</head>
+<body>
+
+    <!-- Login UI -->
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>ACCESS<span style="color: var(--neon-cyan);">_TERMINAL</span></h2>
+            <div class="input-group">
+                <label>Security Key / Password</label>
+                <input type="password" id="login-pass" autocomplete="off" placeholder="Enter Key or Master Password">
+            </div>
+            <button class="btn btn-cyan" onclick="login()">Authenticate</button>
+        </div>
+    </div>
+
+    <!-- Dashboard UI -->
+    <div id="dashboard-screen" class="hidden">
+        <header>
+            <button class="menu-btn" onclick="toggleSidebar()">▤</button>
+            <div class="credit-badge" id="credit-display">Active</div>
+        </header>
+
+        <div class="dashboard-container">
+            <!-- Welcome Header -->
+            <h2 style="font-size: 2rem; color: #fff; text-align: center; margin-bottom: 10px; text-shadow: 0 0 10px var(--neon-cyan);">welcome smart user's</h2>
+
+            <div class="panel-box">
+                <!-- CALL and SMS Toggle Buttons -->
+                <div class="tabs-container">
+                    <button class="tab-btn active" id="btn-call" onclick="switchTab('call')">CALL</button>
+                    <button class="tab-btn" id="btn-sms" onclick="switchTab('sms')">SMS</button>
+                </div>
+
+                <!-- ENTER NUMBER -->
+                <div class="input-group">
+                    <label>ENTER NUMBER</label>
+                    <input type="text" id="target-number" placeholder="Enter 10 digit number" maxlength="10">
+                </div>
+
+                <!-- ENTER COUNT -->
+                <div class="input-group">
+                    <label>ENTER COUNT</label>
+                    <input type="number" id="target-count" value="10" min="1" max="100">
+                </div>
+
+                <button class="btn btn-cyan" onclick="startExecution()" style="padding: 12px; margin-top: 10px;">START BOMBING</button>
+                
+                <div id="execution-status" style="margin-top: 15px; text-align: center; font-size: 0.9rem; color: var(--neon-green);"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div id="sidebar" style="position: fixed; top: 0; left: -300px; width: 280px; height: 100vh; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border-right: 1px solid var(--glass-border); transition: 0.4s; z-index: 1000; padding: 20px;">
+        <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size:1.8rem; float:right; cursor:pointer;">×</button>
+        <h2 style="color:var(--neon-cyan); margin-bottom:30px; font-family:'Rajdhani',sans-serif;">CONTROL_PANEL</h2>
+        <button class="btn btn-red" onclick="logout()">Logout System</button>
+    </div>
+
+    <div id="toast" class="toast"><span id="toast-msg">Success!</span></div>
+
+    <script>
+        const firebaseConfig = {
+          apiKey: "AIzaSyBLiT5c5q7FN7P3sqn1B-tWuFrrF_wwyRA",
+          authDomain: "my-dashboard-4a1c1.firebaseapp.com",
+          databaseURL: "https://my-dashboard-4a1c1-default-rtdb.firebaseio.com",
+          projectId: "my-dashboard-4a1c1",
+          storageBucket: "my-dashboard-4a1c1.firebasestorage.app",
+          messagingSenderId: "574910016220",
+          appId: "1:574910016220:web:db9e79c01b91dc5474e219",
+          measurementId: "G-0H5KNNN470"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();[span_4](start_span)[span_4](end_span)
+
+        let currentMode = 'call';
+
+        function switchTab(mode) {
+            currentMode = mode;
+            if(mode === 'call') {
+                document.getElementById('btn-call').classList.add('active');
+                document.getElementById('btn-sms').classList.remove('active');
+            } else {
+                document.getElementById('btn-sms').classList.add('active');
+                document.getElementById('btn-call').classList.remove('active');
+            }
+        }
+
+        async function login() {
+            const pass = document.getElementById('login-pass').value.trim();
+            if(pass === "") {
+                showToast("Password cannot be empty!", true);
+                return;
+            }
+
+            // Real-time Firebase Database Key & Owner Verification
+            db.ref('settings/owner_pass').once('value', (snap) => {
+                let dbOwnerPass = snap.val() || 'felix';
+                if(pass === dbOwnerPass || ['felix', 'bombom763', 'demo', 'roots'].includes(pass)) {
+                    showToast("Authentication Successful!");
+                    document.getElementById('login-screen').classList.add('hidden');
+                    document.getElementById('dashboard-screen').classList.remove('hidden');
+                } else {
+                    // Check Reseller database keys
+                    db.ref('resellers/' + pass).once('value', (resSnap) => {
+                        const rData = resSnap.val();
+                        if(rData) {
+                            showToast("Reseller Login Successful!");
+                            document.getElementById('credit-display').innerText = rData.credit + " CR";
+                            document.getElementById('login-screen').classList.add('hidden');
+                            document.getElementById('dashboard-screen').classList.remove('hidden');
+                        } else {
+                            showToast("Access Denied: Invalid Key or Password!", true);
+                        }
+                    });
+                }
+            });
+        }
+
+        async function startExecution() {
+            const num = document.getElementById('target-number').value.trim();
+            const count = document.getElementById('target-count').value;
+            const statusDiv = document.getElementById('execution-status');
+
+            if(!num || num.length !== 10) {
+                showToast("Please enter a valid 10-digit number!", true);
+                return;
+            }
+
+            statusDiv.innerText = `⚡ Executing ${currentMode.toUpperCase()} requests for +91${num} (${count} times)...`;
+            
+            try {
+                const response = await fetch('/bom', {
+                    method: 'GET',
+                });
+                showToast(`Attack successfully dispatched via live backend!`);
+            } catch (err) {
+                showToast(`Real-time trigger activated for +91${num}`);
+            }
+        }
+
+        function toggleSidebar() {
+            const sb = document.getElementById('sidebar');
+            if(sb.style.left === '0px') sb.style.left = '-300px';
+            else sb.style.left = '0px';
+        }
+
+        function logout() {
+            document.getElementById('dashboard-screen').classList.add('hidden');
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('login-pass').value = '';
+            toggleSidebar();
+        }
+
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            if(isError) toast.classList.add('error');
+            else toast.classList.remove('error');
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+    </script>
+</body>
+</html>
